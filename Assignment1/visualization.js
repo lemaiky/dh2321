@@ -16,7 +16,7 @@ var svg = d3.select('#mainContent').append("svg")
 
 var keys = ["IVIS", "Stats", "Math", "Art", "Comp", "Prog", "Graph", "HCI", "UX"];
 
-d3.csv("Datas.csv", function(error, data) {
+d3.csv("/Assignment1/Datas.csv", function(error, data) {
   
   var barScale = d3.scaleLinear()
       .domain([0, 10])
@@ -83,7 +83,7 @@ d3.csv("Datas.csv", function(error, data) {
 var table = document.getElementById("aliasTable");
 var datas;
 
-d3.csv("Datas.csv", function(error, data) {
+d3.csv("/Assignment1/Datas.csv", function(error, data) {
 
   var nbRows = data.length;
   var nbCols = 10;

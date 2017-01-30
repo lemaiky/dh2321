@@ -27,7 +27,7 @@ var bubbleCount;
 var colors = d3.scaleOrdinal(d3.schemeCategory20b);
 var selectedFilter = 'IVIS';
 
-d3.csv("Datas.csv", function(error, data) {
+d3.csv("/Assignment1/Datas.csv", function(error, data) {
 
   svgVis.append('g').classed('axis--x axis', true);
   svgVis.append('g').classed('axis--y axis', true);
