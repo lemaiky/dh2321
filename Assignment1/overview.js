@@ -159,15 +159,63 @@ function updateGraph(event){
   }
 }
 
-function clearFilter() {
+function filterGraph() {
+  clearFilter(this);
+
+  var filters = document.getElementsByName("filter");
+
+  for(var i = 0; i < filters.length; i++) {
+    if(filters[i].type == "text") {
+      var threshold = filters[i].value;
+      for(var j = 0; j < datas.length; j++) {
+        var val = datas[alias[j]][filters[i].id];
+        if(parseInt(val) < parseInt(threshold)) {
+          d3.select("#topBubbleText" + alias[j])
+            .style("opacity", 0);
+          d3.select("#topBubble" + alias[j])
+            .style("opacity", 0)
+            .on("mouseenter", function(d) {
+              displayLabel(d, false);
+            });
+          d3.select('#skills_' + alias[j]).remove();
+          table.rows[j+1].cells[0].style.backgroundColor = "#ffffff";
+        }
+      }
+    }
+  }
+}
+
+function clearFilter(event) {
+  if(event.id == "clear") {
+    var filters = document.getElementsByName("filter");
+    for(var i = 0; i < filters.length; i++) {
+      filters[i].value = "";
+    }
+  }
   for(var i = 0; i < datas.length; i++) {
-    var cell = table.rows[i].cells[0];
+    var cell = table.rows[i+1].cells[0];
+    try{
+      d3.select("#topBubble" + alias[i])
+        .style("opacity", 1)
+        .on("mouseenter", function(d) {
+          displayLabel(d, true);
+        });
+    } catch(error) {
+      continue;
+    }
+  }
+}
+
+function clearSort(event) {
+  for(var i = 0; i < datas.length; i++) {
+    var cell = table.rows[i+1].cells[0];
     try{
       d3.select('#skills_' + alias[i]).remove();
       cell.style.backgroundColor = "#ffffff";
       d3.select("#topBubbleText" + alias[i])
         .style("opacity", 0);
       d3.select("#topBubble" + alias[i])
+        .style("opacity", 1)
         .on("mouseleave", function(d, j) {
           displayLabel(d, j, false);
         });
@@ -175,4 +223,5 @@ function clearFilter() {
       continue;
     }
   }
+  clearFilter(event);
 }

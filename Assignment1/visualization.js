@@ -92,7 +92,7 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
   firstRow.className = "firstRow";
   var cell = firstRow.insertCell(0);
   cell.className = "firstCell";
-  cell.innerHTML = "<b>" + keys[0] + "<b>";
+  cell.innerHTML = "<b>" + "Alias" + "<b>";
   
   for (var i = 0; i < nbRows; i++) {
 
@@ -124,7 +124,7 @@ function displaySkillsGraph(d, color){
   var radialLine = radialLineGenerator(points);
   
   for(var i = 0; i < datas.length; i++) {
-    var cell = table.rows[i].cells[0];
+    var cell = table.rows[i+1].cells[0];
     if(cell.textContent == d) {
       if(cell.style.backgroundColor == hex2rgb(color) || cell.style.backgroundColor == color) {
         d3.select('#skills_' + d).remove();

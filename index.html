@@ -15,44 +15,107 @@
 			<br/>
 			<span>
 				IVIS: 
-				<input type="radio" name="filter" id="IVIS" onchange="updateGraph(this)" checked>
+				<input type="radio" name="sort" id="IVIS" onchange="updateGraph(this)" checked>
 			</span>
 			<span>
 				Stats:
-				<input type="radio" name="filter" id="Stats" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="Stats" onchange="updateGraph(this)">
 			</span>
 			<span>
 				Math: 
-				<input type="radio" name="filter" id="Math" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="Math" onchange="updateGraph(this)">
 			</span>
 			<span>
 				Art: 
-				<input type="radio" name="filter" id="Art" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="Art" onchange="updateGraph(this)">
 			</span>
 			<span>
 				Comp: 
-				<input type="radio" name="filter" id="Comp" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="Comp" onchange="updateGraph(this)">
 			</span>
 			<span>
 				Prog: 
-				<input type="radio" name="filter" id="Prog" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="Prog" onchange="updateGraph(this)">
 			</span>
 			<span>
 				Graphics: 
-				<input type="radio" name="filter" id="Graph" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="Graph" onchange="updateGraph(this)">
 			</span>
 			<span>
 				HCI: 
-				<input type="radio" name="filter" id="HCI" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="HCI" onchange="updateGraph(this)">
 			</span>
 			<span>
 				UX: 
-				<input type="radio" name="filter" id="UX" onchange="updateGraph(this)">
+				<input type="radio" name="sort" id="UX" onchange="updateGraph(this)">
 			</span>
-			<span><button onclick="clearFilter()">Clear</button></span>
+			<span><button id="clear" onclick="clearSort(this)">Clear all</button></span>
 		</div>
+
 		<div id="overviewGraph"></div>
 		<div id="mainContent"></div>
+	</div>
+	<div id="filterCont">
+		<h2>Filter Table</h2>
+		<p style="font-style: italic; font-size: 12px;">This filter keeps the people with skills rated equal or above the given values.</p>
+		<table id="filterTable">
+			<tr>
+				<td>IVIS:</td>
+				<td>
+					<input type="text" name="filter" id="IVIS">
+				</td>
+			</tr>
+			<tr>
+				<td>Stats:</td>
+				<td>
+					<input type="text" name="filter" id="Stats">
+				</td>
+			</tr>
+			<tr>
+				<td>Math:</td>
+				<td>
+					<input type="text" name="filter" id="Math">
+				</td>
+			</tr>
+			<tr>
+				<td>Art:</td>
+				<td>
+					<input type="text" name="filter" id="Art">
+				</td>
+			</tr>
+			<tr>
+				<td>Comp:</td>
+				<td>
+					<input type="text" name="filter" id="Comp">
+				</td>
+			</tr>
+			<tr>
+				<td>Prog:</td>
+				<td>
+					<input type="text" name="filter" id="Prog">
+				</td>
+			</tr>
+			<tr>
+				<td>Graph:</td>
+				<td>
+					<input type="text" name="filter" id="Graph">
+				</td>
+			</tr>
+			<tr>
+				<td>HCI:</td>
+				<td>
+					<input type="text" name="filter" id="HCI">
+				</td>
+			</tr>
+			<tr>
+				<td>UX:</td>
+				<td>
+					<input type="text" name="filter" id="UX">
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<button onclick="filterGraph()">Filter</button>
 	</div>
 	<script src="./Assignment1/overview.js"></script>
 	<script src="./Assignment1/visualization.js"></script>
