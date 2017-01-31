@@ -79,6 +79,30 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
         .attr("xlink:href", "#label-path")
         .attr("startOffset", function(d, i) {return i * 100 / numBars + '%';})
         .text(function(d) {return d.toUpperCase(); });
+
+  for (var i = 0; i < datas.length; i++) {
+    var radialLineGenerator = d3.radialLine();
+    var points = [
+      [(9 * 2 * Math.PI) / numBars, datas[alias[i]]['IVIS']*barHeight/10],
+      [(1 * 2 * Math.PI) / numBars, datas[alias[i]]['Stats']*barHeight/10],
+      [(2 * 2 * Math.PI) / numBars, datas[alias[i]]['Math']*barHeight/10],
+      [(3 * 2 * Math.PI) / numBars, datas[alias[i]]['Art']*barHeight/10],
+      [(4 * 2 * Math.PI) / numBars, datas[alias[i]]['Comp']*barHeight/10],
+      [(5 * 2 * Math.PI) / numBars, datas[alias[i]]['Prog']*barHeight/10],
+      [(6 * 2 * Math.PI) / numBars, datas[alias[i]]['Graph']*barHeight/10],
+      [(7 * 2 * Math.PI) / numBars, datas[alias[i]]['HCI']*barHeight/10],
+      [(8 * 2 * Math.PI) / numBars, datas[alias[i]]['UX']*barHeight/10],
+      [(9 * 2 * Math.PI) / numBars, datas[alias[i]]['IVIS']*barHeight/10]];
+
+    var radialLine = radialLineGenerator(points);
+    svg.select('g')
+          .append('path')
+          .attr("id", "skills_"+alias[i])
+          .style("stroke", colors(i))
+          .style("stroke-width","1.5px")
+          .style("opacity", 0)
+          .attr('d', radialLine);
+  }
 });
 
 
@@ -108,39 +132,32 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
     cell0.innerHTML = data[i].Alias;
 
     cell0.onclick = function() {
-      if(this.style.color == hex2rgb("#eeeeee")) {
-        return;
-      }
       var color = getOverviewGraphColor(this.textContent);
       displaySkillsGraph(this.textContent, color);
   	}
+    cell0.onmouseover = function() {
+      displayLabel(this.textContent, true);
+    }
+    cell0.onmouseleave = function() {
+      displayLabel(this.textContent, false);
+    }
   }
 });
 
 // displays(not) the personal skills graph with selected alias
 function displaySkillsGraph(d, color){
-  var radialLineGenerator = d3.radialLine();
-  var points = [
-    [(9 * 2 * Math.PI) / numBars, datas[d]['IVIS']*barHeight/10],
-    [(1 * 2 * Math.PI) / numBars, datas[d]['Stats']*barHeight/10],
-    [(2 * 2 * Math.PI) / numBars, datas[d]['Math']*barHeight/10],
-    [(3 * 2 * Math.PI) / numBars, datas[d]['Art']*barHeight/10],
-    [(4 * 2 * Math.PI) / numBars, datas[d]['Comp']*barHeight/10],
-    [(5 * 2 * Math.PI) / numBars, datas[d]['Prog']*barHeight/10],
-    [(6 * 2 * Math.PI) / numBars, datas[d]['Graph']*barHeight/10],
-    [(7 * 2 * Math.PI) / numBars, datas[d]['HCI']*barHeight/10],
-    [(8 * 2 * Math.PI) / numBars, datas[d]['UX']*barHeight/10],
-    [(9 * 2 * Math.PI) / numBars, datas[d]['IVIS']*barHeight/10]];
-
-  var radialLine = radialLineGenerator(points);
-  
   for(var i = 0; i < datas.length; i++) {
     var cell = table.rows[i+1].cells[0];
     //if selected
     if(cell.textContent == d) {
-      if(cell.style.backgroundColor == hex2rgb(color) || cell.style.backgroundColor == color) {
-        d3.select('#skills_' + d).remove();
+      if(cell.style.backgroundColor == hex2rgb(color) || cell.style.backgroundColor == color
+        || cell.style.color == hex2rgb("#eeeeee") || cell.style.color == "#eeeeee") {
         cell.style.backgroundColor = "#ffffff";
+        cell.onmouseleave = function() {
+          displayLabel(this.textContent, false);
+        }
+        d3.select('#skills_' + d)
+          .style("opacity", 0);
         d3.select("#topBubbleText" + d)
           .style("opacity", 0);
         d3.select("#topBubble" + d)
@@ -150,14 +167,12 @@ function displaySkillsGraph(d, color){
       // if not selected yet
       } else {
         cell.style.backgroundColor = color;
-        svg.select('g')
-          .append('path')
-          .attr("id", "skills_"+d)
-          .style("stroke", color)
-          .style("stroke-width","1.5px")
-          .attr('d', radialLine);
+        cell.onmouseleave = function() {
+          displayLabel(this.textContent, true);
+        }
+        d3.select("#skills_" + d)
+          .style("opacity", 1);
         d3.select("#topBubbleText" + d)
-          .text(function(d){return d;})
           .style("opacity", 1);
         d3.select("#topBubble" + d)
           .on("mouseleave", function(d) {

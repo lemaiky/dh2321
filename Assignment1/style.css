@@ -18,7 +18,7 @@ div#graphCont {
 div#tableDiv {
 	overflow:scroll;
 	width: 100px;
-	height: 750px;
+	height: 725px;
 	float: left;
 	display: inline-block;
 }
@@ -44,6 +44,14 @@ div#overviewGraph {
     float: left;
     padding-left: 100px;
 }
+footer {
+	width: 25%;
+	bottom: 0;
+	right: 1%;
+	text-align: right;
+	margin: 20px auto;
+	position: fixed;
+}
 
 /*
 * Alias table style
@@ -62,7 +70,7 @@ td.firstCell {
 	border-bottom: 1px solid black;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 20px;
+	font-size: 16px;
 }
 td.aliasCol {
 	border-right: 1px solid black;

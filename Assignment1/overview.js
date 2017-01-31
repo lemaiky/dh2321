@@ -91,11 +91,11 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
   bubbleObj = svgVis.selectAll(".topBubble")
     .data(alias)
     .enter().append("g")
-    .attr("id", function(d,i) {return "topBubbleAndText_" + alias[i]});
+    .attr("id", function(d) {return "topBubbleAndText_" + d});
 
     bubbleObj.append("circle")
       .attr("class", "topBubble")
-      .attr("id", function(d,i) {return "topBubble" + alias[i];})
+      .attr("id", function(d) {return "topBubble" + d;})
       .attr("r", 7)
       .attr("cx", function(d) {return bubbleWidth(d);})
       .attr("cy", function(d) {return bubbleHeight(d);})
@@ -155,8 +155,12 @@ function displayLabel(d, display) {
     bubbleObj.select("#topBubbleText" + d)
       .text(function(d){return d;})
       .style("opacity", 1);
+    d3.select('#skills_' + d)
+      .style("opacity", 1);
   } else {
     bubbleObj.select("#topBubbleText" + d)
+      .style("opacity", 0);
+    d3.select('#skills_' + d)
       .style("opacity", 0);
   } 
 }
@@ -191,6 +195,7 @@ function filterGraph() {
       var threshold = filters[i].value;
       for(var j = 0; j < datas.length; j++) {
         var val = datas[alias[j]][filters[i].id];
+        var cell = table.rows[j+1].cells[0];
         if(parseInt(val) < parseInt(threshold)) {
           d3.select("#topBubbleText" + alias[j])
             .style("opacity", 0);
@@ -199,9 +204,11 @@ function filterGraph() {
             .on("mouseenter", function(d) {
               displayLabel(d, false);
             });
-          d3.select('#skills_' + alias[j]).remove();
-          table.rows[j+1].cells[0].style.backgroundColor = "#ffffff";
-          table.rows[j+1].cells[0].style.color = "#eeeeee";
+          cell.style.backgroundColor = "#ffffff";
+          cell.style.color = "#eeeeee";
+          cell.onmouseenter = function() {
+            displayLabel(this.textContent, false);
+          }
         }
       }
     }
@@ -224,6 +231,9 @@ function clearFilter(event) {
         .on("mouseenter", function(d) {
           displayLabel(d, true);
         });
+      cell.onmouseenter = function() {
+        displayLabel(this.textContent, true);
+      }
       cell.style.color = "#000000";
     } catch(error) {
       continue;
@@ -236,8 +246,12 @@ function clearSort(event) {
   for(var i = 0; i < datas.length; i++) {
     var cell = table.rows[i+1].cells[0];
     try{
-      d3.select('#skills_' + alias[i]).remove();
       cell.style.backgroundColor = "#ffffff";
+      cell.onmouseleave = function() {
+        displayLabel(this.textContent, false);
+      }
+      d3.select('#skills_' + alias[i])
+        .style("opacity", 0);
       d3.select("#topBubbleText" + alias[i])
         .style("opacity", 0);
       d3.select("#topBubble" + alias[i])
