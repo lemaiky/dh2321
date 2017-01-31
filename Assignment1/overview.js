@@ -1,38 +1,52 @@
+/************************************************************
+ *
+ * GLOBAL VARIABLES
+ *
+ ************************************************************/
 var margin = {top: 20, right: 20, bottom: 20, left: 20},
     widthOv = 900 - margin.left - margin.right,
     heightOv = 500 - margin.top - margin.bottom,
     numBars = 9;
 
+var bubbleObj, datas, alias, bubbleCount;
+var colors = d3.scaleOrdinal(d3.schemeCategory20b);
+var selectedFilter = 'IVIS';
+var keys = ["IVIS", "Stats", "Math", "Art", "Comp", "Prog", "Graph", "HCI", "UX"];
+
+/************************************************************
+ * Container style
+ ************************************************************/
 var svgVis = d3.select('#overviewGraph').append("svg")
     .attr("width", widthOv+"px")
     .attr("height", heightOv+"px")
   .append("g")
     .attr("transform", "translate(" + margin.right + "," + margin.top + ")");
 
-var x = d3.scaleOrdinal()
-    .range([0, widthOv/1.5], .1, 1);
-
-var y = d3.scaleLinear()
-    .domain([0, 10])
-    .range([heightOv/1.5, 0]);
-
-var xAxis = d3.axisBottom()
-    .scale(x);
-var yAxis = d3.axisLeft()
-    .scale(y)
-    .ticks(10);
-
-var bubbleObj, datas, alias;
-var bubbleCount;
-var colors = d3.scaleOrdinal(d3.schemeCategory20b);
-var selectedFilter = 'IVIS';
-
+/************************************************************
+ *
+ * MAIN GRAPH 
+ *
+ ************************************************************/
 d3.csv("./Assignment1/Datas.csv", function(error, data) {
+
+  //Overview graph axis
+  var x = d3.scaleOrdinal()
+      .range([0, widthOv/1.5], .1, 1);
+
+  var y = d3.scaleLinear()
+      .domain([0, 10])
+      .range([heightOv/1.5, 0]);
+
+  var xAxis = d3.axisBottom()
+      .scale(x);
+  var yAxis = d3.axisLeft()
+      .scale(y)
+      .ticks(10);
 
   svgVis.append('g').classed('axis--x axis', true);
   svgVis.append('g').classed('axis--y axis', true);
 
-  // Remove old axes and add the new ones onto the root svg
+  // Set x and y axis
   svgVis.select('.axis--x')
     .attr('transform', "translate(0," + heightOv/1.5 + ")") // Always position at 0 on the y-axis
     .call(xAxis);
@@ -40,6 +54,7 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
   svgVis.select('.axis--y')
     .call(yAxis);
 
+  // Set horizontal lines for each tick
   for(var j = 0; j < 10; j++) {
     var lines = svgVis.select(".axis--x").append("line")
       .attr("x1", 0) 
@@ -50,9 +65,11 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
       .attr("transform", function(d, i) { return "translate(0," + -(heightOv/1.5)/10 * (j+1) + ")"; });
   }
 
+  // initialize arrays
   datas = new Array(data.length);
   alias = new Array(data.length);
   
+  // save all datas from csv file in global variables
   for(var i = 0; i < data.length; i++) {
     datas[data[i].Alias] = new Array(10);
 
@@ -69,8 +86,8 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
     datas[data[i].Alias]['UX'] = data[i].UX;
   }
 
+  // initialize alias bubbles
   clearBubbleCount();
-  
   bubbleObj = svgVis.selectAll(".topBubble")
     .data(alias)
     .enter().append("g")
@@ -93,8 +110,8 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
         return displaySkillsGraph(d, colors(i));
       });
 
+    // initialize alias bubble text
     clearBubbleCount();
-
     bubbleObj.append("text")
       .attr("class", "topBubbleText")
       .attr("id", function(d,i) {return "topBubbleText" + alias[i];})
@@ -108,18 +125,20 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
       .attr("alignment-baseline", "middle");
 });
 
+// returns the height to which the bubble must be displayed
 function bubbleHeight(d){
   var val = datas[d][selectedFilter];
   return (heightOv/1.5)/10 * (10-val);
 }
 
+// returns the width to which the bubble must be displayed
 function bubbleWidth(d) {
   var val = datas[d][selectedFilter];
   bubbleCount[selectedFilter][val] += 1;
-
   return 8*(3*(bubbleCount[selectedFilter][val])-1) + 10;
 }
 
+// clear bubbleCount array
 function clearBubbleCount(){
   bubbleCount = new Array(10);
   for(var k = 0; k < keys.length; k++) {
@@ -130,6 +149,7 @@ function clearBubbleCount(){
   }
 }
 
+// displays(not) alias bubble text
 function displayLabel(d, display) {
   if(display) {
     bubbleObj.select("#topBubbleText" + d)
@@ -141,6 +161,7 @@ function displayLabel(d, display) {
   } 
 }
 
+// updates main graph by sorting bubbles
 function updateGraph(event){
   selectedFilter = event.id;
   clearBubbleCount();
@@ -159,6 +180,7 @@ function updateGraph(event){
   }
 }
 
+// filters graph to filter out not wanted values
 function filterGraph() {
   clearFilter(this);
 
@@ -186,6 +208,7 @@ function filterGraph() {
   }
 }
 
+// clear filter fields
 function clearFilter(event) {
   if(event.id == "clear") {
     var filters = document.getElementsByName("filter");
@@ -208,6 +231,7 @@ function clearFilter(event) {
   }
 }
 
+// clear all selections and filters
 function clearSort(event) {
   for(var i = 0; i < datas.length; i++) {
     var cell = table.rows[i+1].cells[0];

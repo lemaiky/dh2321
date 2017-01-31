@@ -1,6 +1,6 @@
 /************************************************************
  *
- * PERSONAL SKILLS GRAPH 
+ * GLOBAL VARIABLES
  *
  ************************************************************/
 
@@ -9,15 +9,22 @@ var width = 400,
     barHeight = 125,
     numBars = 9;
 
+/************************************************************
+ * Container style
+ ************************************************************/
 var svg = d3.select('#mainContent').append("svg")
     .attr("id", "skills_svg")
   .append("g")
     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
-var keys = ["IVIS", "Stats", "Math", "Art", "Comp", "Prog", "Graph", "HCI", "UX"];
-
+/************************************************************
+ *
+ * PERSONAL SKILLS GRAPH 
+ *
+ ************************************************************/
 d3.csv("./Assignment1/Datas.csv", function(error, data) {
   
+  // personal skills graph axis and circles
   var barScale = d3.scaleLinear()
       .domain([0, 10])
       .range([0, barHeight]);
@@ -50,7 +57,7 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
     .attr("class", "x axis")
     .call(xAxis);
 
-  // Labels
+  // personal skills labels
   var labelRadius = barHeight * 1.15;
 
   var labels = svg.append("g")
@@ -79,7 +86,6 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
  * ALIAS TABLE
  *
  ************************************************************/
-
 var table = document.getElementById("aliasTable");
 var datas;
 
@@ -110,6 +116,7 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
   }
 });
 
+// displays(not) the personal skills graph with selected alias
 function displaySkillsGraph(d, color){
   var radialLineGenerator = d3.radialLine();
   var points = [
@@ -128,6 +135,7 @@ function displaySkillsGraph(d, color){
   
   for(var i = 0; i < datas.length; i++) {
     var cell = table.rows[i+1].cells[0];
+    //if selected
     if(cell.textContent == d) {
       if(cell.style.backgroundColor == hex2rgb(color) || cell.style.backgroundColor == color) {
         d3.select('#skills_' + d).remove();
@@ -138,6 +146,7 @@ function displaySkillsGraph(d, color){
           .on("mouseleave", function(d) {
             displayLabel(d, false);
           });
+      // if not selected yet
       } else {
         cell.style.backgroundColor = color;
         svg.select('g')
@@ -158,11 +167,13 @@ function displaySkillsGraph(d, color){
   }
 }
 
+// returns color of the linked bubble
 function getOverviewGraphColor(alias) {
   var bubble = bubbleObj.select("#topBubble" + alias);
   return bubble.style("fill");
 }
 
+// returns rgb from hex color
 function hex2rgb(hex) {
   var h=hex.replace('#', '');
   try {

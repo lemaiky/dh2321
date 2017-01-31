@@ -1,3 +1,6 @@
+/*
+* Container style
+*/
 html {
 	width: 100%;
 	height: 100%;
@@ -25,6 +28,26 @@ div#filterCont {
 	float: left;
 	display: inline-block;
 }
+div#mainContent {
+    height: 500px;
+    width: 100px;
+    display: inline-block;
+}
+div#overviewGraph {
+	width: 200px;
+    height: 350px;
+}
+#skills_svg {
+	height: 400px;
+    width: 700px;
+    display: inline-block;
+    float: left;
+    padding-left: 100px;
+}
+
+/*
+* Alias table style
+*/
 table#aliasTable {
 	border: 1px solid black;
 	border-spacing: 0px;
@@ -44,26 +67,10 @@ td.firstCell {
 td.aliasCol {
 	border-right: 1px solid black;
 }
-table#filterTable {
-	border-spacing: 0px;
-	width: 100px;
-}
-div#mainContent {
-    height: 500px;
-    width: 100px;
-    display: inline-block;
-}
-div#overviewGraph {
-	width: 200px;
-    height: 350px;
-}
-#skills_svg {
-	height: 400px;
-    width: 700px;
-    display: inline-block;
-    float: left;
-    padding-left: 100px;
-}
+
+/*
+* Table scroll bar
+*/
 ::-webkit-scrollbar {
 	-webkit-appearance: none;
 	width: 8px;
@@ -73,3 +80,12 @@ div#overviewGraph {
 	background-color: rgba(0, 0, 0, .5);
 	-webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
+
+/*
+* Filter table style
+*/
+table#filterTable {
+	border-spacing: 0px;
+	width: 100px;
+}
+

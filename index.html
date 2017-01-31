@@ -7,10 +7,12 @@
 	<title>DH2321 | Assignment 1 - Visualizing groups</title>
 </head>
 <body>
+	<!-- Alias table -->
 	<div id="tableDiv">
 		<table id="aliasTable"></table>
 	</div>
 	<div id="graphCont">
+		<!-- Sort panel-->
 		<div id="filterDiv">
 			<br/>
 			<span>
@@ -51,12 +53,14 @@
 			</span>
 			<span><button id="clear" onclick="clearSort(this)">Clear all</button></span>
 		</div>
-
+		<!-- Main graph -->
 		<div id="overviewGraph"></div>
+		<!-- Personal skills graph -->
 		<div id="mainContent"></div>
 	</div>
+	<!-- Filter panel -->
 	<div id="filterCont">
-		<h2>Filter Table</h2>
+		<h2>Filter panel</h2>
 		<p style="font-style: italic; font-size: 12px;">This filter keeps the people with skills rated equal or above the given values.</p>
 		<table id="filterTable">
 			<tr>
@@ -117,6 +121,8 @@
 		<br/>
 		<button onclick="filterGraph()">Filter</button>
 	</div>
+
+	<!-- JS Scripts -->
 	<script src="./Assignment1/overview.js"></script>
 	<script src="./Assignment1/visualization.js"></script>
 	
