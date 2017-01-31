@@ -179,6 +179,7 @@ function filterGraph() {
             });
           d3.select('#skills_' + alias[j]).remove();
           table.rows[j+1].cells[0].style.backgroundColor = "#ffffff";
+          table.rows[j+1].cells[0].style.color = "#eeeeee";
         }
       }
     }
@@ -200,6 +201,7 @@ function clearFilter(event) {
         .on("mouseenter", function(d) {
           displayLabel(d, true);
         });
+      cell.style.color = "#000000";
     } catch(error) {
       continue;
     }

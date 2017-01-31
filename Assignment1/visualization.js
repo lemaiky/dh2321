@@ -101,6 +101,9 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
     cell0.innerHTML = data[i].Alias;
 
     cell0.onclick = function() {
+      if(this.style.color == hex2rgb("#eeeeee")) {
+        return;
+      }
       var color = getOverviewGraphColor(this.textContent);
       displaySkillsGraph(this.textContent, color);
   	}
