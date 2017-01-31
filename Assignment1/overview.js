@@ -8,7 +8,7 @@ var margin = {top: 20, right: 20, bottom: 20, left: 20},
     heightOv = 500 - margin.top - margin.bottom,
     numBars = 9;
 
-var bubbleObj, datas, alias, bubbleCount;
+var bubbleObj, datas, alias, interests, bubbleCount;
 var colors = d3.scaleOrdinal(d3.schemeCategory20b);
 var selectedFilter = 'IVIS';
 var keys = ["IVIS", "Stats", "Math", "Art", "Comp", "Prog", "Graph", "HCI", "UX"];
@@ -68,6 +68,7 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
   // initialize arrays
   datas = new Array(data.length);
   alias = new Array(data.length);
+  interests = new Array(data.length);
   
   // save all datas from csv file in global variables
   for(var i = 0; i < data.length; i++) {
@@ -84,6 +85,8 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
     datas[data[i].Alias]['Graph'] = data[i].Graphics;
     datas[data[i].Alias]['HCI'] = data[i].HCI;
     datas[data[i].Alias]['UX'] = data[i].UX;
+
+    interests[data[i].Alias] = data[i].Interests;
   }
 
   // initialize alias bubbles
@@ -102,9 +105,11 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
       .style("fill", function(d,i) {return colors(i);})
       .on("mouseover", function(d) {
         displayLabel(d, true);
+        displayInterests(d, true);
       })
       .on("mouseleave", function(d) {
         displayLabel(d, false);
+        displayInterests(d, false);
       })
       .on("click", function(d, i) {
         return displaySkillsGraph(d, colors(i));
@@ -165,6 +170,16 @@ function displayLabel(d, display) {
   } 
 }
 
+// displays(not) interests
+function displayInterests(d, display) {
+  var interestsCont = document.getElementById("interestsText");
+  if(display) {
+    interestsText.innerHTML = interests[d];
+  } else {
+    interestsText.innerHTML = "";
+  }
+}
+
 // updates main graph by sorting bubbles
 function updateGraph(event){
   selectedFilter = event.id;
@@ -203,6 +218,7 @@ function filterGraph() {
             .style("opacity", 0)
             .on("mouseenter", function(d) {
               displayLabel(d, false);
+              displayInterests(d, false);
             })
             .on("mouseleave", function(d) {
               displayLabel(d, false);
@@ -236,6 +252,7 @@ function clearFilter(event) {
         .style("opacity", 1)
         .on("mouseenter", function(d) {
           displayLabel(d, true);
+          displayInterests(d, true);
         });
       cell.onmouseenter = function() {
         displayLabel(this.textContent, true);
@@ -254,6 +271,7 @@ function clearSort(event) {
     try{
       cell.style.backgroundColor = "#ffffff";
       cell.onmouseleave = function() {
+        displayInterests(this.textContent, false);
         displayLabel(this.textContent, false);
       }
       d3.select('#skills_' + alias[i])
@@ -263,6 +281,7 @@ function clearSort(event) {
       d3.select("#topBubble" + alias[i])
         .style("opacity", 1)
         .on("mouseleave", function(d, j) {
+          displayInterests(d, false);
           displayLabel(d, j, false);
         });
     } catch(error) {

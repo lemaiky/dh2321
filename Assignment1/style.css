@@ -37,6 +37,14 @@ div#overviewGraph {
 	width: 200px;
     height: 350px;
 }
+div#interestsDiv{
+	margin-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 250px;
+    height: 250px;
+    border: 1px solid black;
+}
 #skills_svg {
 	height: 400px;
     width: 700px;

@@ -136,9 +136,11 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
       displaySkillsGraph(this.textContent, color);
   	}
     cell0.onmouseover = function() {
+      displayInterests(this.textContent, true);
       displayLabel(this.textContent, true);
     }
     cell0.onmouseleave = function() {
+      displayInterests(this.textContent, false);
       displayLabel(this.textContent, false);
     }
   }
