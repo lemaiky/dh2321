@@ -8,6 +8,7 @@ var width = 400,
     height = 350,
     barHeight = 125,
     numBars = 9;
+var keys = ["IVIS", "Stats", "Math", "Art", "Comp", "Prog", "Graph", "HCI", "UX"];
 
 /************************************************************
  * Container style
