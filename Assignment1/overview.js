@@ -197,8 +197,7 @@ function filterGraph() {
         var val = datas[alias[j]][filters[i].id];
         var cell = table.rows[j+1].cells[0];
         if(parseInt(val) < parseInt(threshold)) {
-          d3.select("#topBubbleText" + alias[j])
-            .style("opacity", 0);
+          displayLabel(alias[j], false);
           d3.select("#topBubble" + alias[j])
             .style("opacity", 0)
             .on("mouseenter", function(d) {
