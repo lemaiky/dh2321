@@ -203,12 +203,18 @@ function filterGraph() {
             .style("opacity", 0)
             .on("mouseenter", function(d) {
               displayLabel(d, false);
+            })
+            .on("mouseleave", function(d) {
+              displayLabel(d, false);
             });
           cell.style.backgroundColor = "#ffffff";
           cell.style.color = "#eeeeee";
           cell.onmouseenter = function() {
             displayLabel(this.textContent, false);
-          }
+          };
+          cell.onmouseleave = function() {
+            displayLabel(this.textContent, false);
+          };
         }
       }
     }
