@@ -196,7 +196,8 @@ function filterGraph() {
       for(var j = 0; j < datas.length; j++) {
         var val = datas[alias[j]][filters[i].id];
         var cell = table.rows[j+1].cells[0];
-        if(parseInt(val) < parseInt(threshold)) {
+        if(parseInt(val) < parseInt(threshold) 
+          && (cell.style.backgroundColor == hex2rgb("#ffffff") || cell.style.backgroundColor == "#ffffff" || cell.style.backgroundColor == "")) {
           displayLabel(alias[j], false);
           d3.select("#topBubble" + alias[j])
             .style("opacity", 0)
