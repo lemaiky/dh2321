@@ -1,0 +1,92 @@
+<!doctype html>
+<html land="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style/style.css">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/d3.parcoords.js"></script>
+	<script src="js/d3.svg.multibrush.js"></script>
+	<script src="js/divgrid.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/d3.parcoords.css">
+	<title>DH2321 | Information Visualization</title>
+</head>
+
+<body>
+
+	<h2>Information Visualization - Project 2</h2>
+
+	<div>
+		<h3> Story #1 </h3>
+	</div>
+
+	<div id="trailOneDiv">
+		<h3>Trail One</h3>
+		<div class="graph">
+			<div class="waveSelection">
+				<h5>Waves Selection</h5>
+				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveOne" onclick="updateTrailOne()">1995-1999</input></div>
+				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveTwo" onclick="updateTrailOne()">2000-2004</input></div>
+				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveThree" onclick="updateTrailOne()">2005-2009</input></div>
+				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveFour" onclick="updateTrailOne()">2010-2014</input></div>
+
+				<div class="searchGrid" id="searchGridOne">
+					<h5>Search country in table</h5>
+					<div class="searchInputDiv"><input type="text" id="fieldSearchGridOne"></input></div>
+					<button id="buttonSearchGridOne" onclick="searchGridOne()">Search</button>
+				</div>
+
+				<div class="sortGridDiv" id="sortGridOneDiv">
+					<h5>Sort table by</h5>
+					<select class="sortGrid" id="sortGridOne" onchange="sortGridOne()">
+						<option value="countryAZ">Country (Ascending)</option>
+						<option value="countryZA">Country (Descending)</option>
+						<option value="wave09">Wave (Ascending)</option>
+						<option value="wave90">Wave (Descending)</option>
+					</select>
+				</div>
+			</div>
+			<div id="trailOne" class="parcoords" style="width:85%;height:300px"></div>
+		</div>
+		<div id="gridOne" style="width:100%;height:250px"></div>
+	</div>
+
+	<div>
+		<h3> Story #2 </h3>
+	</div>
+
+	<div id="trailTwoDiv">
+		<h3>Trail Two</h3>
+		<div class="waveSelection">
+			<h5>Wave Selection</h5>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveOne" onclick="updateTrailTwo()">1995-1999</input></div>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveTwo" onclick="updateTrailTwo()">2000-2004</input></div>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveThree" onclick="updateTrailTwo()">2005-2009</input></div>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveFour" onclick="updateTrailTwo()">2010-2014</input></div>
+
+			<div class="searchGrid" id="searchGridTwo">
+				<h5>Search country in table</h5>
+				<div class="searchInputDiv"><input type="text" id="fieldSearchGridTwo"></input></div>
+				<button id="buttonSearchGridTwo" onclick="searchGridTwo()">Search</button>
+			</div>
+
+			<div class="sortGridDiv" id="sortGridTwoDiv">
+				<h5>Sort table by</h5>
+				<select class="sortGrid" id="sortGridTwo" onchange="sortGridTwo()">
+					<option value="countryAZ">Country (Ascending)</option>
+					<option value="countryZA">Country (Descending)</option>
+					<option value="wave09">Wave (Ascending)</option>
+					<option value="wave90">Wave (Descending)</option>
+				</select>
+			</div>
+		</div>
+		<div id="trailTwo" class="parcoords" style="width:85%;height:300px"></div>
+		<div id="gridTwo" style="width:100%;height:250px"></div>
+	</div>
+
+	<footer>KTH 2017</footer>
+
+	<script src="js/content.js"></script>
+	<script src="js/trailOne.js"></script>
+	<script src="js/trailTwo.js"></script>
+</body>
+</html>

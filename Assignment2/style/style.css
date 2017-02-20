@@ -1,0 +1,88 @@
+@import url("http://fonts.googleapis.com/css?family=Quicksand");
+html, body {
+  background-color: #faf9f0;
+  font-family: 'Quicksand';
+  width: 96%;
+  margin-left: 25px;
+}
+
+.graph {
+  display: block;
+}
+.waveSelection {
+  float: right;
+  width: 10%;
+}
+.waveCheckbox {
+  font-size: 13px;
+  padding: 2px;
+  padding-left: 8px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+.sortGrid {
+  display: inherit;
+  margin-top: -15px;
+  padding-left: 30px;
+}
+
+.searchInputDiv {
+  margin-top: -15px;
+}
+
+footer {
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  font-size: 15px;
+  position: relative;
+  color: #000;
+}
+
+/*************************************************
+* GRID STYLE
+*************************************************/
+#gridOne {
+  position: relative;
+  overflow: scroll;
+  border: 1px solid black;
+}
+#gridTwo {
+  position: relative;
+  overflow: scroll;
+  border: 1px solid black;
+}
+.row,
+.header {
+  clear: left;
+  font-size: 10px;
+  line-height: 18px;
+  height: 18px;
+}
+.row:nth-child(odd) {
+  background: rgba(0,0,0,0.05);
+}
+.header {
+  font-size: 11px;
+}
+.row:hover {
+  background-color: #aaaaaa;
+}
+#gridOne .cell {
+  float: left;
+  text-align: center;
+  white-space: nowrap;
+  width: 115px;
+  height: 18px;
+}
+#gridTwo .cell {
+  float: left;
+  text-align: center;
+  white-space: nowrap;
+  width: 75px;
+  height: 18px;
+}
+.col-0 {
+  width: 80px;
+  text-align: left;
+}
