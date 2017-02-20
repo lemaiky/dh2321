@@ -27,7 +27,7 @@ var svgVis = d3.select('#overviewGraph').append("svg")
  * MAIN GRAPH 
  *
  ************************************************************/
-d3.csv("./Assignment1/Datas.csv", function(error, data) {
+d3.csv("Datas.csv", function(error, data) {
 
   //Overview graph axis
   var x = d3.scaleOrdinal()

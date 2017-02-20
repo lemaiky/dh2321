@@ -23,7 +23,7 @@ var svg = d3.select('#mainContent').append("svg")
  * PERSONAL SKILLS GRAPH 
  *
  ************************************************************/
-d3.csv("./Assignment1/Datas.csv", function(error, data) {
+d3.csv("Datas.csv", function(error, data) {
   
   // personal skills graph axis and circles
   var barScale = d3.scaleLinear()
@@ -114,7 +114,7 @@ d3.csv("./Assignment1/Datas.csv", function(error, data) {
 var table = document.getElementById("aliasTable");
 var datas;
 
-d3.csv("./Assignment1/Datas.csv", function(error, data) {
+d3.csv("Datas.csv", function(error, data) {
 
   var nbRows = data.length;
   var nbCols = 10;
