@@ -189,13 +189,13 @@ ul.topnav li a:hover {
 #gridOne .cell {
   float: left;
   text-align: center;
-  width: 113px;
+  width: 9%;
   height: 18px;
 }
 #gridTwo .cell {
   float: left;
   text-align: center;
-  width: 73px;
+  width: 5.8%;
   height: 18px;
 }
 
