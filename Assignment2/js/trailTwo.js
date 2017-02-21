@@ -1,4 +1,5 @@
 var filteredDatasTwo = new Array();
+var averageDatasTwo = new Array();
 var gridTwo = d3.divgrid();
 var fullDatasTwo;
 var parcoordsTwo;
@@ -16,8 +17,6 @@ var dimensionsTwo = {
   "Housewife as fulfilling as work": {type:"number"},
   "Work importance": {type:"number"},
   "Financial satisfaction": {type:"number"},
-  "Income/person": {type:"number"},
-  "% Poverty": {type:"number"},
   "Life expectancy": {type:"number"},
   "Wave": {
     type: "string",
@@ -31,8 +30,12 @@ var dimensionsTwo = {
 d3.csv('datas/trailtwo_values_95-99.csv', function(data) {
 	filteredDatasTwo["waveOne"] = new Array();
 	data.forEach(function(country) {
-		if(country.Happiness != "") {
-      filteredDatasTwo["waveOne"].push(country);
+    if(country['Country'] == 'Average') {
+      averageDatasTwo.push(country);
+    } else {
+      if(country.Happiness != "") {
+        filteredDatasTwo["waveOne"].push(country);
+      }
     }
 	});
 });
@@ -43,8 +46,12 @@ d3.csv('datas/trailtwo_values_95-99.csv', function(data) {
 d3.csv('datas/trailtwo_values_00-04.csv', function(data) {
 	filteredDatasTwo["waveTwo"] = new Array();
 	data.forEach(function(country) {
-		if(country.Happiness != "") {
-			filteredDatasTwo["waveTwo"].push(country);
+    if(country['Country'] == 'Average') {
+      averageDatasTwo.push(country);
+    } else {
+      if(country.Happiness != "") {
+        filteredDatasTwo["waveTwo"].push(country);
+      }
     }
 	});
 });
@@ -55,8 +62,12 @@ d3.csv('datas/trailtwo_values_00-04.csv', function(data) {
 d3.csv('datas/trailtwo_values_05-09.csv', function(data) {
 	filteredDatasTwo["waveThree"] = new Array();
 	data.forEach(function(country) {
-		if(country.Happiness != "") {
-			filteredDatasTwo["waveThree"].push(country);
+    if(country['Country'] == 'Average') {
+      averageDatasTwo.push(country);
+    } else {
+      if(country.Happiness != "") {
+        filteredDatasTwo["waveThree"].push(country);
+      }
     }
 	});
 });
@@ -67,8 +78,12 @@ d3.csv('datas/trailtwo_values_05-09.csv', function(data) {
 d3.csv('datas/trailtwo_values_10-14.csv', function(data) {
 	filteredDatasTwo["waveFour"] = new Array();
 	data.forEach(function(country) {
-		if(country.Happiness != "") {
-			filteredDatasTwo["waveFour"].push(country);
+    if(country['Country'] == 'Average') {
+      averageDatasTwo.push(country);
+    } else {
+      if(country.Happiness != "") {
+        filteredDatasTwo["waveFour"].push(country);
+      }
     }
 	});
 });
@@ -150,10 +165,15 @@ function updateGridTwoOnSearch(searchValue) {
     searchResults = fullDatasTwo;
   } else {
     fullDatasTwo.forEach(function(country) {
-      if(country["Country"].toLowerCase() == searchValue.toLowerCase())
+      if(country["Country"].toLowerCase().indexOf(searchValue.toLowerCase()) != -1)
         searchResults.push(country);
     });
   }
+
+  parcoordsTwo
+    .data(searchResults)
+    .color(function(d) { return colorgen[d['Wave']]; })
+    .render();
 
   d3.select("#gridTwo")
     .datum(searchResults)
@@ -181,10 +201,37 @@ function updateDatasToDisplayTwo(waveId) {
 function updateWavesTwo() {
   parcoordsTwo.brushReset();
 
-  parcoordsTwo
-    .data(fullDatasTwo)
-    .color(function(d) { return colorgen[d['Wave']]; })
-    .render();
+  var val = document.getElementById('sortGraphTwo').value;
+  switch(val) {
+    case "income":
+      parcoordsTwo
+        .data(fullDatasTwo)
+        .color(function(d) { return shadeColor1(colorgenSort[d['Wave']], -d['Income/person'] * 0.001); })
+        .render();
+      break;
+    case "poverty":
+      parcoordsTwo
+        .data(fullDatasTwo)
+        .color(function(d) { return shadeColor1(colorgenSort[d['Wave']], -d['% Poverty']); })
+        .render();
+      break;
+    case "none":
+      parcoordsTwo
+        .data(fullDatasTwo)
+        .color(function(d) { return colorgen[d['Wave']]; })
+        .render();
+      break;
+  }
 
   sortGridTwo();
+}
+
+function updateAverageWavesTwo() {
+  parcoordsTwo.brushReset();
+
+  parcoordsTwo
+    .data(averageDatasTwo)
+    .color(function(d) { return colorgen[d['Wave']]; })
+    .alpha(1)
+    .render();
 }

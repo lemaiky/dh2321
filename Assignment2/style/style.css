@@ -1,11 +1,19 @@
-@import url("http://fonts.googleapis.com/css?family=Quicksand");
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
 html, body {
   background-color: #faf9f0;
   font-family: 'Quicksand';
-  width: 96%;
-  margin-left: 25px;
+  width: 95%;
+  margin-left: 30px;
+  font-size: 14px;
 }
 
+.container {
+  padding-top: 40px;
+}
+
+h1 {
+  padding-bottom: 30px;
+}
 .graph {
   display: block;
 }
@@ -25,11 +33,19 @@ html, body {
   margin-top: -15px;
   padding-left: 30px;
 }
-
+#sortGridOneDiv {
+  margin-top: 250px;
+}
+.sortGraph {
+  display: inherit;
+  margin-top: -15px;
+}
 .searchInputDiv {
   margin-top: -15px;
 }
-
+.sources {
+  font-size: 12px;
+}
 footer {
   width: 100%;
   padding: 15px;
@@ -37,6 +53,100 @@ footer {
   font-size: 15px;
   position: relative;
   color: #000;
+}
+img {
+  width: 400px;
+  height: 280px;
+  padding: 10px;
+}
+.legend {
+  font-size: 11px;
+  margin-top: -10px;
+  padding-left: 10px;
+}
+div.image {
+  display: inline-table;
+}
+.notabene {
+  font-size: 10px;
+  font-style: italic;
+  margin-top: -10px;
+}
+.separator {
+  height: 100px;
+}
+
+/*************************************************
+* HEADER
+*************************************************/
+header {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #f2f2f2;
+  height: 50px;
+}
+header h3 {
+  float: left;
+  padding-left: 15px;
+}
+/* Remove margins and padding from the list, and add a black background color */
+ul.topnav {
+  float: right;
+  list-style-type: none;
+}
+/* Float the list items side by side */
+ul.topnav li {
+  float: left;
+}
+/* Style the links inside the list items */
+ul.topnav li a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 0px 10px;
+    text-decoration: none;
+    transition: 0.1s;
+    font-size: 15px;
+}
+/* Change background color of links on hover */
+ul.topnav li a:hover {
+  background-color: #555;
+}
+
+/*************************************************
+* COLOR PALETTE
+*************************************************/
+#colorPalette {
+  display: inline-flex;
+  height: 15px;
+  font-size: 11px;
+}
+#color1 {
+  background-color: #FFFFFF;
+  width: 15px;
+}
+#color2 {
+  width: 15px;
+  background-color:#bfbfbf;
+}
+#color3 {
+  width: 15px;
+  background-color: #7f7f7f;
+
+}
+#color4 {
+  width: 15px;
+  background-color: #3f3f3f;
+}
+#color5 {
+  width: 15px;
+  background-color: #000000;
 }
 
 /*************************************************
@@ -64,6 +174,7 @@ footer {
 }
 .header {
   font-size: 11px;
+  border-bottom: 1px solid black;
 }
 .row:hover {
   background-color: #aaaaaa;
@@ -71,17 +182,21 @@ footer {
 #gridOne .cell {
   float: left;
   text-align: center;
-  white-space: nowrap;
-  width: 115px;
+  width: 113px;
   height: 18px;
 }
 #gridTwo .cell {
   float: left;
   text-align: center;
-  white-space: nowrap;
-  width: 75px;
+  width: 73px;
   height: 18px;
 }
+
+#gridTwo .header {
+  line-height: 10px;
+  height: 20px;
+}
+
 .col-0 {
   width: 80px;
   text-align: left;

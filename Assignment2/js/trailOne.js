@@ -1,6 +1,6 @@
-var filteredDatasOne = new Array();
+//var filteredDatasOne = new Array();
 var gridOne = d3.divgrid();
-var fullDatasOne;
+var fullDatasOne = new Array();
 var fullCountriesOne;
 var parcoordsOne;
 
@@ -24,10 +24,11 @@ var dimensionsOne = {
 * WAVE ONE: 1995-1999
 *********************************************************/
 d3.csv('datas/trailone_values_95-99.csv', function(data) {
-	filteredDatasOne["waveOne"] = new Array();
+	//filteredDatasOne["waveOne"] = new Array();
 	data.forEach(function(country) {
 		if(country.Happiness != "") {
-      filteredDatasOne["waveOne"].push(country);
+      //filteredDatasOne["waveOne"].push(country);
+      fullDatasOne.push(country);
     }
 	});
 });
@@ -36,10 +37,11 @@ d3.csv('datas/trailone_values_95-99.csv', function(data) {
 * WAVE TWO: 2000-2004
 *********************************************************/
 d3.csv('datas/trailone_values_00-04.csv', function(data) {
-	filteredDatasOne["waveTwo"] = new Array();
+	//filteredDatasOne["waveTwo"] = new Array();
 	data.forEach(function(country) {
 		if(country.Happiness != "") {
-			filteredDatasOne["waveTwo"].push(country);
+			//filteredDatasOne["waveTwo"].push(country);
+      fullDatasOne.push(country);
     }
 	});
 });
@@ -48,10 +50,11 @@ d3.csv('datas/trailone_values_00-04.csv', function(data) {
 * WAVE THREE: 2005-2009
 *********************************************************/
 d3.csv('datas/trailone_values_05-09.csv', function(data) {
-	filteredDatasOne["waveThree"] = new Array();
+	//filteredDatasOne["waveThree"] = new Array();
 	data.forEach(function(country) {
 		if(country.Happiness != "") {
-			filteredDatasOne["waveThree"].push(country);
+			//filteredDatasOne["waveThree"].push(country);
+      fullDatasOne.push(country);
     }
 	});
 });
@@ -60,10 +63,11 @@ d3.csv('datas/trailone_values_05-09.csv', function(data) {
 * WAVE FOUR: 2010-2014
 *********************************************************/
 d3.csv('datas/trailone_values_10-14.csv', function(data) {
-	filteredDatasOne["waveFour"] = new Array();
+	//filteredDatasOne["waveFour"] = new Array();
 	data.forEach(function(country) {
 		if(country.Happiness != "") {
-			filteredDatasOne["waveFour"].push(country);
+			//filteredDatasOne["waveFour"].push(country);
+      fullDatasOne.push(country);
     }
 	});
 });
@@ -84,7 +88,12 @@ d3.csv('datas/scaleFile.csv', function(data) {
     .brushMode("1D-axes-multi")
     .alphaOnBrushed(0.1);
 
-  parcoordsOne.data([]).render();
+  parcoordsOne
+    .data(fullDatasOne)
+    .color(function(d) { return colorgen[d['Wave']]; })
+    .render();
+
+  sortGridOne();
 })
 
 function renderGridOne() {
@@ -135,48 +144,53 @@ function updateGridOne(sortId, order) {
   renderGridOne();
 }
 
-function updateGridOneOnSearch(searchValue) {
-  var searchResults = new Array();
+// function updateGridOneOnSearch(searchValue) {
+//   var searchResults = new Array();
+//
+//   if(searchValue == "") {
+//     searchResults = fullDatasOne;
+//   } else {
+//     fullDatasOne.forEach(function(country) {
+//       if(country["Country"].toLowerCase().indexOf(searchValue.toLowerCase()) != -1)
+//         searchResults.push(country);
+//     });
+//   }
+//
+//   parcoordsOne
+//     .data(searchResults)
+//     .color(function(d) { return colorgen[d['Wave']]; })
+//     .render();
+//
+//   d3.select("#gridOne")
+//     .datum(searchResults)
+//     .call(gridOne)
+//     .selectAll(".row")
+//     .on({
+//       "mouseover": function(d) {
+//         var highlights = new Array();
+//         fullDatasOne.forEach(function(country) {
+//           if(country["Country"] == d["Country"])
+//             highlights.push(country);
+//         });
+//         parcoordsOne.highlight(highlights);
+//       },
+//       "mouseout": parcoordsOne.unhighlight
+//     });
+// }
 
-  if(searchValue == "") {
-    searchResults = fullDatasOne;
-  } else {
-    fullDatasOne.forEach(function(country) {
-      if(country["Country"].toLowerCase() == searchValue.toLowerCase())
-        searchResults.push(country);
-    });
-  }
+// function updateDatasToDisplayOne(waveId) {
+//   filteredDatasOne[waveId].forEach(function(country) {
+//     fullDatasOne.push(country);
+//   });
+// }
 
-  d3.select("#gridOne")
-    .datum(searchResults)
-    .call(gridOne)
-    .selectAll(".row")
-    .on({
-      "mouseover": function(d) {
-        var highlights = new Array();
-        fullDatasOne.forEach(function(country) {
-          if(country["Country"] == d["Country"])
-            highlights.push(country);
-        });
-        parcoordsOne.highlight(highlights);
-      },
-      "mouseout": parcoordsOne.unhighlight
-    });
-}
-
-function updateDatasToDisplayOne(waveId) {
-  filteredDatasOne[waveId].forEach(function(country) {
-    fullDatasOne.push(country);
-  });
-}
-
-function updateWavesOne() {
-  parcoordsOne.brushReset();
-
-  parcoordsOne
-    .data(fullDatasOne)
-    .color(function(d) { return colorgen[d['Wave']]; })
-    .render();
-
-  sortGridOne();
-}
+// function updateWavesOne() {
+//   parcoordsOne.brushReset();
+//
+//   parcoordsOne
+//     .data(fullDatasOne)
+//     .color(function(d) { return colorgen[d['Wave']]; })
+//     .render();
+//
+//   sortGridOne();
+// }

@@ -8,22 +8,107 @@
 	<script src="js/d3.svg.multibrush.js"></script>
 	<script src="js/divgrid.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/d3.parcoords.css">
-	<title>DH2321 | Information Visualization</title>
+	<title>IVIS17 | Project 2</title>
 </head>
 
 <body>
 
-	<h2>Information Visualization - Project 2</h2>
+	<header>
+		<h3>IVIS17 - Project 2 | Visualizing the World through its Own Worldview</h3>
+		<ul class="topnav" id="myTopnav">
+		  <li><a href="#analyticTrailOne">Trail 1</a></li>
+			<li><a href="#trailOneDiv">Visualization 1</a></li>
+		  <li><a href="#analyticTrailTwo">Trail 2</a></li>
+		  <li><a href="#trailTwoDiv">Visualization 2</a></li>
+		</ul>
+	</header>
 
-	<div>
-		<h3> Story #1 </h3>
+	<!--
+			PART 1: INFLUENCE OF FAMILY ON HAPPINESS
+				- Analytic trail -
+	-->
+	<div class="container" id="analyticTrailOne">
+		<h2>Analytic Trail 1</h2>
+
+		<p>
+			<a href="http://www.worldvaluessurvey.org/">World Value Survey</a> allows you to look for datas for different « waves ». <br/>
+			Depending on the wave chosen, a list of countries shows up. The navigation forces us to go back to find countries that are available throughout different waves.
+		</p>
+		<div>
+			<div class="image" style="float:left;">
+				<img src="img/wvs_waves.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/wvs_countries.png"></img>
+			</div>
+		</div>
+		<p>
+			After selecting the countries, it brings up the list of surveys conducted.
+			That list can be filtered by variable and title. Unfortunately, they can change from one wave to another.
+		</p>
+		<div class="image">
+			<img src="img/wvs_surveys.png"></img>
+		</div>
+		<p>
+			The results can then be presented in tables or in graphics, with different options.
+		</p>
+		<div>
+			<div class="image" style="float:left;">
+				<img src="img/wvs_tables.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/wvs_map.png"></img>
+			</div>
+		</div>
+		<div>
+			<div class="image" style="float:left;">
+				<img src="img/Happiness_10-14.png"></img>
+				<p class="legend">Feeling of happiness in 2010-2014 (<a href="http://www.worldvaluessurvey.org/">WVS</a>)</p>
+			</div>
+			<div class="image">
+				<img src="img/wvs_happiness_country.png"></img>
+				<p class="legend">Answers of Argentina (2010-2014) (<a href="http://www.worldvaluessurvey.org/">WVS</a>)</p>
+			</div>
+		</div>
+		<div>
+			<div class="image" style="float:left;">
+				<img src="img/Family_VeryImportant.png"></img>
+				<p class="legend">% of "Very important" (<a href="http://www.worldvaluessurvey.org/">WVS</a>)</p>
+			</div>
+			<div class="image">
+				<img src="img/Happiness_VeryHappy.png"></img>
+				<p class="legend">% of "Very happy" (<a href="http://www.worldvaluessurvey.org/">WVS</a>)</p>
+			</div>
+		</div>
+		<p>
+			Timelines offer the possibility to visualize either the answers of one country throughout the years, or the evolution of one answer for all countries, but not the combination of both. <br/>
+			It is possible to cross the results with another variable but the options are quite limited as no more than two variables can be crossed together.
+		</p>
+		<p>
+			After looking through that tool, the last four waves have been selected for the visualization, as they had the most countries available.
+		</p>
 	</div>
 
-	<div id="trailOneDiv">
-		<h3>Trail One</h3>
+	<!--
+			PART 1: INFLUENCE OF FAMILY ON HAPPINESS
+				- Visualization -
+	-->
+	<div class="container" id="trailOneDiv">
+		<h2>Visualization 1: Influence of family on happiness</h2>
+		<p>
+			People have, overall, always been quite happy. One major factor that can influence is <i>family</i>.<br/>
+			Indeed, most people consider family as very important, if not the most important.
+			As the importance of family grows, how does it impact the feeling of happiness ?
+		</p>
+		<p>
+			The following visualization shows 34 countries through the years (from 1995 to 2014).
+		</p>
+		<p class="notabene">
+			NB: The missing datas were by default put to 0; hence the dropping lines.
+		</p>
 		<div class="graph">
 			<div class="waveSelection">
-				<h5>Waves Selection</h5>
+				<!-- <h5>Waves Selection</h5>
 				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveOne" onclick="updateTrailOne()">1995-1999</input></div>
 				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveTwo" onclick="updateTrailOne()">2000-2004</input></div>
 				<div class="waveCheckbox"><input type="checkbox" name="wavesTrailOne" id="waveThree" onclick="updateTrailOne()">2005-2009</input></div>
@@ -31,12 +116,11 @@
 
 				<div class="searchGrid" id="searchGridOne">
 					<h5>Search country in table</h5>
-					<div class="searchInputDiv"><input type="text" id="fieldSearchGridOne"></input></div>
-					<button id="buttonSearchGridOne" onclick="searchGridOne()">Search</button>
-				</div>
+					<div class="searchInputDiv"><input type="text" id="fieldSearchGridOne" onkeyup="searchGridOne()"></input></div>
+				</div> -->
 
 				<div class="sortGridDiv" id="sortGridOneDiv">
-					<h5>Sort table by</h5>
+					<h5>Order table by</h5>
 					<select class="sortGrid" id="sortGridOne" onchange="sortGridOne()">
 						<option value="countryAZ">Country (Ascending)</option>
 						<option value="countryZA">Country (Descending)</option>
@@ -48,14 +132,77 @@
 			<div id="trailOne" class="parcoords" style="width:85%;height:300px"></div>
 		</div>
 		<div id="gridOne" style="width:100%;height:250px"></div>
+		<div class="sources">Sources: <a href="http://www.worldvaluessurvey.org/">World Value Survey</a></div>
 	</div>
 
-	<div>
-		<h3> Story #2 </h3>
+	<div class="separator"></div>
+
+	<!--
+			PART 2: FAMILY VS WORK: INFLUENCE ON HAPPINESS
+				- Analytic trail -
+	-->
+	<div class="container" id="analyticTrailTwo">
+		<h2>Analytic trail 2</h2>
+		<p>
+			The tool can show all the values for all the countries and for the four selected waves, and the details of the datas are presented in the following table. <br/>
+			Hovering on the table’s rows highlights the different curves related to the selected country, making it possible to see the changes throughout the years.
+		</p>
+		<div>
+			<div class="image" style="float: left;">
+				<img src="img/tool_overview.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/tool_hovering.png"></img>
+			</div>
+		</div>
+		<p>
+			Brushing on the axis allows the selection of one particular interval of interest, and the table updates along. <br/>
+			Multibrushing on the axis also allows the comparison between different intervals. Happiness seems to go in hand with life satisfaction.<br/>
+			It can also be used to select waves rather than displaying the four of them.
+		</p>
+		<div>
+			<div class="image" style="float: left;">
+				<img src="img/tool_brushing.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/tool_multibrushing.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/tool_multibrushing_waves.png"></img>
+			</div>
+		</div>
+		<p>
+			Changes to that tool included actually taking one wave off the graph to allow for a clearer overview. <br/>
+			It is also possible search for a country in the table instead of scrolling throught it. <br/>
+			From Gapminder, a few variables have been added both as axes for a new element of comparison, and as a color dimension to the lines (income/person and % poverty), so the higher the darker. <br/>
+			It seems that the higher the income, the more happy one becomes.
+		</p>
+		<div>
+			<div class="image" style="float: left;">
+				<img src="img/tool_checkbox.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/tool_search.png"></img>
+			</div>
+			<div class="image">
+				<img src="img/tool_color.png"></img>
+			</div>
+		</div>
+		<p>
+			Finally, the averages of each variables for the four waves have been added to show how the overall mentality evolved throughout the years.
+		</p>
+		<div class="image">
+			<img src="img/tool_average.png"></img>
+		</div>
 	</div>
 
-	<div id="trailTwoDiv">
-		<h3>Trail Two</h3>
+	<!--
+			PART 2: FAMILY VS WORK: INFLUENCE ON HAPPINESS
+				- Visualization -
+	-->
+	<div class="container" id="trailTwoDiv">
+		<h2>Visualization 2 : Family vs. work: influence on happiness</h2>
+		<p>In addition to family, work is probably what occupies most of our time. Does it influence happiness as much as family does ? </p>
 		<div class="waveSelection">
 			<h5>Wave Selection</h5>
 			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveOne" onclick="updateTrailTwo()">1995-1999</input></div>
@@ -63,14 +210,25 @@
 			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveThree" onclick="updateTrailTwo()">2005-2009</input></div>
 			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveFour" onclick="updateTrailTwo()">2010-2014</input></div>
 
+			<div class="averageToggleDiv" id="averageTrailTwo" onmouseover="seeAverageTwo(event)" onmouseout="seeAverageTwo(event)"><h5>See average per year</h5></div>
+
+			<div class="sortGridDiv" id="sortGridTwoDiv">
+				<h5>Sort by</h5>
+				<select class="sortGraph" id="sortGraphTwo" onchange="updateWavesTwo()">
+					<option value="none">No sort</option>
+					<option value="income">Income/person</option>
+					<option value="poverty">% Poverty</option>
+				</select>
+				<div id="colorPalette">Low<div id="color1"></div><div id="color2"></div><div id="color3"></div><div id="color4"></div><div id="color5"></div>High</div>
+			</div>
+
 			<div class="searchGrid" id="searchGridTwo">
 				<h5>Search country in table</h5>
-				<div class="searchInputDiv"><input type="text" id="fieldSearchGridTwo"></input></div>
-				<button id="buttonSearchGridTwo" onclick="searchGridTwo()">Search</button>
+				<div class="searchInputDiv"><input type="text" id="fieldSearchGridTwo" onkeyup="searchGridTwo()"></input></div>
 			</div>
 
 			<div class="sortGridDiv" id="sortGridTwoDiv">
-				<h5>Sort table by</h5>
+				<h5>Order table by</h5>
 				<select class="sortGrid" id="sortGridTwo" onchange="sortGridTwo()">
 					<option value="countryAZ">Country (Ascending)</option>
 					<option value="countryZA">Country (Descending)</option>
@@ -81,9 +239,10 @@
 		</div>
 		<div id="trailTwo" class="parcoords" style="width:85%;height:300px"></div>
 		<div id="gridTwo" style="width:100%;height:250px"></div>
+		<div class="sources">Sources: <a href="http://www.worldvaluessurvey.org/">World Value Survey</a>, <a href="http://www.gapminder.org/">Gapminder</a></div>
 	</div>
 
-	<footer>KTH 2017</footer>
+	<footer>KTH | DH2021 - Information Visualization | 2017</footer>
 
 	<script src="js/content.js"></script>
 	<script src="js/trailOne.js"></script>

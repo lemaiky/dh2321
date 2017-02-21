@@ -20,7 +20,12 @@ d3.divgrid = function(config) {
       .classed("cell", true);
 
     selection.selectAll(".header .cell")
-      .text(function(d) { return d; });
+      .text(function(d) {
+        if(d == "Housewife as fulfilling as work")
+          return "Housewife = work";
+        else
+          return d;
+      });
 
     header.exit().remove();
 
@@ -45,7 +50,9 @@ d3.divgrid = function(config) {
 
     selection.selectAll(".cell")
       .text(function(d) {
-        if(d == "") {
+        if(d == "Housewife as fulfilling as work")
+          return "Housewife = work";
+        else if(d == "") {
           return "no datas";
         } else {
           return d;
