@@ -54,11 +54,6 @@ footer {
   position: relative;
   color: #000;
 }
-img {
-  width: 400px;
-  height: 280px;
-  padding: 10px;
-}
 .legend {
   font-size: 11px;
   margin-top: -10px;
@@ -74,6 +69,18 @@ div.image {
 }
 .separator {
   height: 100px;
+}
+#firstIteration {
+  margin-top: 20px;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+}
+#firstIteration:hover {
+  background-color: #7f7f7f;
 }
 
 /*************************************************
@@ -200,4 +207,31 @@ ul.topnav li a:hover {
 .col-0 {
   width: 80px;
   text-align: left;
+}
+
+/*************************************************
+* IMAGES
+*************************************************/
+img {
+  width: 400px;
+  height: 280px;
+  padding: 5px;
+}
+#img_survey {
+  width: 600px;
+}
+#img_xls_table {
+  width: 600px;
+  height: 100px;
+}
+.img_tool {
+  width: 600px;
+  height: 250px;
+}
+#img_tool_waves {
+  height: 200px;
+  padding-bottom: 40px;
+}
+#img_tool_color {
+  height: 150px;
 }

@@ -1,0 +1,118 @@
+<!doctype html>
+<html land="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style/style.css">
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="js/d3.parcoords.js"></script>
+	<script src="js/d3.svg.multibrush.js"></script>
+	<script src="js/divgrid.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/d3.parcoords.css">
+	<title>IVIS17 | Project 2</title>
+</head>
+
+<body>
+
+	<header>
+		<h3>IVIS17 - Project 2 | Visualizing the World through its Own Worldview</h3>
+		<ul class="topnav" id="myTopnav">
+		  <li><a href="./#analyticTrailOne">Trail 1</a></li>
+			<li><a href="./#analyticTrailTwo">Trail 2</a></li>
+      <li><a href="./#learning">Learning</a></li>
+			<li><a href="#trailOneDiv">Visualization</a></li>
+		</ul>
+	</header>
+
+  <div class="container">
+    <button id="firstIteration" onclick="seeFirstIteration()">Show/hide first iteration</button>
+  </div>
+
+	<!--
+			PART 1: INFLUENCE OF FAMILY ON HAPPINESS
+				- Visualization -
+	-->
+	<div class="container" id="trailOneDiv">
+		<h2>Visualization 1: Influence of family on happiness</h2>
+		<p>
+			People have, overall, always been quite happy. One major factor that can influence is <i>family</i>.<br/>
+			Indeed, most people consider family as very important, if not the most important.
+			As the importance of family grows, how does it impact the feeling of happiness ?
+		</p>
+		<p>
+			The following visualization shows 34 countries through the years (from 1995 to 2014).
+		</p>
+		<p class="notabene">
+			NB: The missing datas were by default put to 0; hence the dropping lines.
+		</p>
+		<div class="graph">
+			<div class="waveSelection">
+				<div class="sortGridDiv" id="sortGridOneDiv">
+					<h5>Order table by</h5>
+					<select class="sortGrid" id="sortGridOne" onchange="sortGridOne()">
+						<option value="countryAZ">Country (Ascending)</option>
+						<option value="countryZA">Country (Descending)</option>
+						<option value="wave09">Wave (Ascending)</option>
+						<option value="wave90">Wave (Descending)</option>
+					</select>
+				</div>
+			</div>
+			<div id="trailOne" class="parcoords" style="width:85%;height:300px"></div>
+		</div>
+		<div id="gridOne" style="width:100%;height:250px"></div>
+		<div class="sources">Sources: <a href="http://www.worldvaluessurvey.org/">World Value Survey</a></div>
+	</div>
+
+	<!--
+			PART 2: FAMILY VS WORK: INFLUENCE ON HAPPINESS
+				- Visualization -
+	-->
+	<div class="container" id="trailTwoDiv">
+		<h2>Visualization 2: Family vs. work: influence on happiness</h2>
+		<p>In addition to family, work is probably what occupies most of our time. Does it influence happiness as much as family does ? </p>
+		<div class="waveSelection">
+			<h5>Wave Selection</h5>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveOne" onclick="updateTrailTwo()">1995-1999</input></div>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveTwo" onclick="updateTrailTwo()">2000-2004</input></div>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveThree" onclick="updateTrailTwo()">2005-2009</input></div>
+			<div class="waveCheckbox"><input type="checkbox" name="wavesTrailTwo" id="waveFour" onclick="updateTrailTwo()">2010-2014</input></div>
+
+			<div class="averageToggleDiv" id="averageTrailTwo" onmouseover="seeAverageTwo(event)" onmouseout="seeAverageTwo(event)"><h5>See average per year</h5></div>
+
+			<div class="sortGridDiv" id="sortGridTwoDiv">
+				<h5>Sort by</h5>
+				<select class="sortGraph" id="sortGraphTwo" onchange="updateWavesTwo()">
+					<option value="none">No sort</option>
+					<option value="income">Income/person</option>
+					<option value="poverty">% Poverty</option>
+				</select>
+				<div id="colorPalette">Low<div id="color1"></div><div id="color2"></div><div id="color3"></div><div id="color4"></div><div id="color5"></div>High</div>
+			</div>
+
+			<div class="searchGrid" id="searchGridTwo">
+				<h5>Search country in table</h5>
+				<div class="searchInputDiv"><input type="text" id="fieldSearchGridTwo" onkeyup="searchGridTwo()"></input></div>
+			</div>
+
+			<div class="sortGridDiv" id="sortGridTwoDiv">
+				<h5>Order table by</h5>
+				<select class="sortGrid" id="sortGridTwo" onchange="sortGridTwo()">
+					<option value="countryAZ">Country (Ascending)</option>
+					<option value="countryZA">Country (Descending)</option>
+					<option value="wave09">Wave (Ascending)</option>
+					<option value="wave90">Wave (Descending)</option>
+				</select>
+			</div>
+		</div>
+		<div id="trailTwo" class="parcoords" style="width:85%;height:300px"></div>
+		<div id="gridTwo" style="width:100%;height:250px"></div>
+		<div class="sources">Sources: <a href="http://www.worldvaluessurvey.org/">World Value Survey</a>, <a href="http://www.gapminder.org/">Gapminder</a></div>
+	</div>
+
+	<footer>KTH | DH2021 - Information Visualization | 2017</footer>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+	<script src="js/content.js"></script>
+	<script src="js/trailOne.js"></script>
+	<script src="js/trailTwo.js"></script>
+</body>
+</html>
