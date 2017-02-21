@@ -94,6 +94,8 @@ d3.csv('datas/scaleFile.csv', function(data) {
     .render();
 
   sortGridOne();
+
+  $('#trailOneDiv').hide();
 })
 
 function renderGridOne() {

@@ -1,5 +1,5 @@
 Country,Happiness,Life satisfaction,Meaning of life,Friends importance,Family importance,Emph. on family,Nb of children,% Housewife,Proud parents,Housewife as fulfilling as work,Work importance,Financial satisfaction,Income/person,% Poverty,Life expectancy,Wave
-,-1,2,2,2,2,-0.5,0,0,-1,-2,0,1,500,0,30,1995-1999
+,-1,2,2,2,2,0,0,0,-1,-1,2,2,500,0,50,1995-1999
 ,2,9,4,4,4,1,5,100,2,2,4,9,70000,100,90,2000-2004
-,-1,2,2,2,2,-0.5,0,0,-1,-2,0,1,500,0,30,2005-2009
+,-1,2,2,2,2,0,0,0,-1,-1,2,2,500,0,50,2005-2009
 ,2,9,4,4,4,1,5,100,2,2,4,9,70000,100,90,2010-2014
